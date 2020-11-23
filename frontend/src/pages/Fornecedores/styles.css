@@ -1,0 +1,21 @@
+div{
+    justify-content: space-around;
+    align-items: center;
+}
+div.row{
+    margin-bottom: 8px;
+}
+div.form-group{
+    padding: 5px;
+}
+input#formCnpj.form-control{
+    max-width: 170px;
+}
+form.form-inline{
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+div.table-responsive{
+    width:100%;
+}
