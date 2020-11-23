@@ -1,12 +1,18 @@
+import React from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import Routes from './pages/Routes';
+import Navbar from './components/navbar';
+import Routes from './pages/Routes.jsx';
 
 function App() {
   return (
     <div className="App">
-      <Routes/>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Routes />
+      </div>
     </div>
   );
 }
