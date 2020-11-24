@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import "./styles.css"
-import api from '../../services/api';
+
+// import api from '../../services/api';
+
 import { cnpj as cnpjValidator } from 'cpf-cnpj-validator';
 import InputMask from "react-input-mask";
 import {
@@ -33,14 +35,14 @@ function AddFornecedor(props) {
         setEndereco(evt.target.value)
     }
 
-    function enviarFormulario() {
-        api.get('/fornecedores', {
-            name: name,
-            cnpj: cnpj,
-            telefone: telefone,
-            endereco: endereco
-        })
-    }
+    // function enviarFormulario() {
+    //     api.get('/fornecedores', {
+    //         name: name,
+    //         cnpj: cnpj,
+    //         telefone: telefone,
+    //         endereco: endereco
+    //     })
+    // }
 
     useEffect(() => {
         if (props.id) {
@@ -79,7 +81,7 @@ function AddFornecedor(props) {
                         </Form.Group>
                         <Form.Group controlId="formTelefone">
                             <Form.Label>Telefone</Form.Label>
-                            <InputMask mask="(99)99999-9999" placeholder="(00)00000-0000" />
+                            <InputMask mask="(99)99999-9999" placeholder="(00)00000-0000" value={telefone} onChange={setTelefoneValue}/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Group controlId="formEndereco">
