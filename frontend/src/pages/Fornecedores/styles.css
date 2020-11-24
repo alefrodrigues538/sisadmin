@@ -6,10 +6,9 @@ div.row{
     margin-bottom: 8px;
 }
 div.form-group{
+    justify-content: space-around;
+    align-items: center;
     padding: 5px;
-}
-input#formCnpj.form-control{
-    max-width: 170px;
 }
 form.form-inline{
     justify-content: space-around;
