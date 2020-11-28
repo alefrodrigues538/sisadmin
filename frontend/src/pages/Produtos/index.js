@@ -3,8 +3,6 @@ import "./styles.css"
 
 import api from '../../services/api';
 
-import { cnpj as cnpjValidator } from 'cpf-cnpj-validator';
-
 import {
     Container, Row, Col,
     Form, Button, Card, Table, Alert,
@@ -17,11 +15,11 @@ export default function Fornecedores() {
     const [tBody, setTBody] = useState([]);
 
     const [name, setName] = useState('');
-    const [cnpj, setCnpj] = useState('');
+    const [barcode, setBarcode] = useState('');
 
     const [alertHidden, setAlertHidden] = useState(true);
     const [alertSuccess, setAlertSuccess] = useState(true);
-    const [alertMSG, setAlertMSG] = useState('Fornecedor Cadastrado com sucesso!');
+    const [alertMSG, setAlertMSG] = useState('Produto Cadastrado com sucesso!');
 
     //Modal
     const [show, setShow] = useState(false);
@@ -36,29 +34,28 @@ export default function Fornecedores() {
     function setNameValue(evt) {
         setName(evt.target.value);
     }
-    function setCnpjValue(evt) {
-        let formatted = cnpjValidator.format(evt.target.value)
-        setCnpj(formatted);
+    function setBarcodeValue(evt) {
+        setBarcode(evt.target.value);
     }
 
     async function getTableValues() {
-        console.log(name+','+ cnpj)
-        await api.get('/fornecedores', {
+        console.log(name+','+ barcode)
+        await api.get('/produtos', {
             headers: {
                 'Content-Type': 'application/json',
                 'name': name,
-                'cnpj': cnpj
+                'barcode': barcode
             }
         }).then(function (res) {
             console.log(res.data);
-            setTHead(['#', 'Nome', 'CNPJ', 'Telefone', 'Endereco', 'Ações']);
+            setTHead(['#', 'Barcode', 'Nome', 'Descrição', 'Ações']);
             setTBody(res.data);
 
         }).catch(function (error) {
             console.log(error.message, error.response)
             setAlertHidden(false);
             setAlertSuccess(false);
-            setAlertMSG('Não foi possivel localizar nenhum fornecedor!');
+            setAlertMSG('Não foi possivel localizar nenhum produto!');
         });
     }
 
@@ -66,8 +63,8 @@ export default function Fornecedores() {
         getTableValues();
     }
 
-    async function deleteRow(id) {
-        await api.delete('/fornecedores/' + id)
+    async function deleteRow(_barcode) {
+        await api.delete('/produtos/' + _barcode)
             .then(function (res) {
                 getTableValues();
                 setAlertHidden(false);
@@ -77,7 +74,7 @@ export default function Fornecedores() {
                 console.log(error.message, error.response)
                 setAlertHidden(false);
                 setAlertSuccess(false);
-                setAlertMSG('Não foi possivel deletar o fornecedor!');
+                setAlertMSG('Não foi possivel deletar o produto!');
             });
         handleClose()
     }
@@ -89,7 +86,7 @@ export default function Fornecedores() {
     return (
         <Container>
             <h3>{name}</h3>
-            <h3>{cnpj}</h3>
+            <h3>{barcode}</h3>
             <Row>
                 <Col hidden={alertHidden}>
                     <Alert variant={alertSuccess === true ? 'success' : 'danger'}>
@@ -108,17 +105,17 @@ export default function Fornecedores() {
                 <Card>
                     <Form inline>
                         <Form.Row>
+                            <Form.Group controlId="formCnpj" >
+                                <Form.Label>Barcode:</Form.Label>
+                                <Form.Control type="Text" width="100px" maxLength={18} onChange={setBarcodeValue} value={barcode} placeholder="Escaneie ou Digite"></Form.Control>
+                            </Form.Group>
                             <Form.Group controlId="formName">
                                 <Form.Label>Nome:</Form.Label>
                                 <Form.Control type="Text" placeholder="Digite um nome" onChange={setNameValue} value={name}></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="formCnpj" >
-                                <Form.Label>CNPJ:</Form.Label>
-                                <Form.Control type="Text" width="100px" maxLength={18} onChange={setCnpjValue} value={cnpj} placeholder="00.000.000/0001-00"></Form.Control>
-                            </Form.Group>
                         </Form.Row>
                         <Button variant="primary" type="button" onClick={refreshSearch}>Buscar</Button>
-                        <Button variant="dark" type="button"><a href="/fornecedores/add">Adicionar Fornecedor</a></Button>
+                        <Button variant="dark" type="button"><a href="/produtos/add">Adicionar Produto</a></Button>
                     </Form>
                 </Card>
             </Row>
@@ -140,14 +137,13 @@ export default function Fornecedores() {
                                     return (
                                         <tr key={el.id}>
                                             <th>{el.id}</th>
+                                            <th>{el.barcode}</th>
                                             <th>{el.name}</th>
-                                            <th>{el.cnpj}</th>
-                                            <th>{el.telefone}</th>
-                                            <th classname="enderecoTxt">{el.endereco}</th>
+                                            <th>{el.description}</th>
                                             <th>
                                                 <Form inline>
                                                     <Form.Group>
-                                                        <Button variant="outline-secondary"><a href={"/fornecedores/add?" + el.cnpj}>Edit</a></Button>
+                                                        <Button variant="outline-secondary"><a href={"/produtos/add?" + el.barcode}>Edit</a></Button>
                                                         <Button variant="outline-danger" onClick={handleShow}>Del</Button>
                                                         <>
                                                             <Modal show={show} onHide={handleClose}>
@@ -159,7 +155,7 @@ export default function Fornecedores() {
                                                                     <Button variant="secondary" onClick={handleClose}>
                                                                         Cancelar
                                                                     </Button>
-                                                                    <Button variant="danger" onClick={() => deleteRow(el.id)}>
+                                                                    <Button variant="danger" onClick={() => deleteRow(el.barcode)}>
                                                                         Deletar
                                                                     </Button>
                                                                 </Modal.Footer>

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) =>{
-    const User = sequelize.define('Fornecedores', {
+    const model = sequelize.define('Fornecedores', {
         name: DataTypes.STRING,
         cnpj: {
             type: DataTypes.STRING,
@@ -10,14 +10,20 @@ module.exports = (sequelize, DataTypes) =>{
         telefone: {
             type: DataTypes.STRING,
             validate:{
-                len: [15],
+                len: [14, 15],
+            },
+        },
+        endereco: {
+            type: DataTypes.STRING,
+            validate:{
+                len: [0,256],
             },
         },
         deleted_at:{
             type: DataTypes.DATE,
             defaultValue: null
         }
-    });
+    }, { sequelize, modelName: 'Fornecedores'});
 
-    return User;
+    return model;
 }

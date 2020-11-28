@@ -1,9 +1,9 @@
 module.exports = {
   dialect: 'mysql',
-  host: 'localhost',
-  username: 'root',
-  password: '',
-  database: 'db_adminsis',
+  host: 'mysql.sisadmin.kinghost.net',
+  username: 'sisadmin',
+  password: 'xtwo5etaw',
+  database: 'sisadmin',
   operatorAliases: false,
   define: {
     timestamps: true,

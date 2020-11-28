@@ -1,21 +1,21 @@
-// const { Fornecedores } = require('../models');
+// const Produto = require('../models/Produto');
 const models = require('../models/index');
 const { Op } = require("sequelize");
 
 
 exports.get = async (req, res, next) => {
-    let _cnpj = req.headers.cnpj;
+    let _barcode = req.headers.barcode;
     let _name = req.headers.name;
     let result = undefined;
 
-    console.log(_cnpj + ' ,' + _name);
+    console.log(_barcode + ' ,' + _name);
     try {
-        if (_cnpj) {
-            console.log('tem cnpj')
+        if (_barcode) {
+            console.log('teem barcode')
             if (_name = 'undefined') { _name = '' }
-            result = await models.Fornecedores.findAll({
+            result = await models.Produtos.findAll({
                 where: {
-                    cnpj: _cnpj,
+                    barcode: _barcode,
                     name: {
                         [Op.like]: '%' + _name + '%'
                     },
@@ -25,7 +25,7 @@ exports.get = async (req, res, next) => {
 
         } else if (_name) {
             console.log('tem nome')
-            result = await models.Fornecedores.findAll({
+            result = await models.Produtos.findAll({
                 where: {
                     name: {
                         [Op.like]: '%' + _name + '%',
@@ -34,8 +34,8 @@ exports.get = async (req, res, next) => {
                 }
             })
         } else {
-            console.log('sem nome e cnpj')
-            result = await models.Fornecedores.findAll({
+            console.log('sem nome e barcode')
+            result = await models.Produtos.findAll({
                 where: {
                     deleted_at: null
                 }
@@ -50,7 +50,7 @@ exports.get = async (req, res, next) => {
 exports.getByName = async (req, res, next)=> {
     const _name = req.params.name;
     if (_name){
-        const result = await models.Fornecedores.findAll({
+        const result = await models.Produtos.findAll({
             where:{
                 name:_name
             }
@@ -67,20 +67,20 @@ exports.getByName = async (req, res, next)=> {
 
 exports.post = async (req, res, next) => {
     let result = undefined;
-    console.log(req.body.endereco)
+    console.log(req.body.barcode)
     try {
-        const fornecedores = await models.Fornecedores.findAll({
+        const Produto = await models.Produtos.findAll({
             where: {
-                cnpj: req.body.cnpj
+                barcode: req.body.barcode
             }
         });
-        if (fornecedores.length > 0) {
-            return res.status(400).json('o usuario já está cadastrado')
+        if (Produto.length > 0) {
+            return res.status(400).json('o produto já está cadastrado')
         } else {
-            result = await models.Fornecedores.create(req.body);
+            result = await models.Produtos.create(req.body);
         }
 
-        return res.status(200).json('Usuario cadastrado com sucesso!!');
+        return res.status(200).json('Produto cadastrado com sucesso!!');
 
     } catch (err) {
         return res.status(400).json({ error: err.message });
@@ -90,22 +90,21 @@ exports.post = async (req, res, next) => {
 exports.put = async (req, res, next) => {
     let result = undefined;
     try {
-        if (req.params.id) {
-            result = await models.Fornecedores.findAll({
+        if (req.params.barcode) {
+            result = await models.Produtos.findAll({
                 where: {
-                    id: req.params.id,
+                    barcode: req.params.barcode,
                     deleted_at: null
                 }
             });
 
             if (result.length > 0) {
-                result = await models.Fornecedores.update({ 
-                    name: req.headers.name, 
-                    cnpj: req.headers.cnpj, 
-                    telefone: req.headers.telefone,
-                    endereco: req.headers.endereco}, {
+                result = await models.Produtos.update({ 
+                    barcode: req.headers.barcode, 
+                    name: req.headers.name,
+                    description: req.headers.description}, {
                     where: {
-                        id: req.params.id
+                        barcode: req.params.barcode
                     }
                 })
                 return res.status(200).json('Usuario alterado com sucesso');
@@ -125,15 +124,18 @@ exports.delete = async (req, res, next) => {
 
     console.log(date);
     try {
-        if (req.params.id) {
+        if (req.params.barcode) {
+            result = await models.Produtos.findAll({
+                where: {
+                    barcode: req.params.barcode,
+                    deleted_at: null
+                }
+            });
 
-            result = await models.Fornecedores.findByPk(req.params.id);
-            return res.json(result);
-            
             if (result.length > 0) {
-                result = await models.Fornecedores.update({ deleted_at: date }, {
+                result = await models.Produtos.update({ deleted_at: date }, {
                     where: {
-                        id: req.params.id
+                        barcode: req.params.barcode
                     }
                 })
 

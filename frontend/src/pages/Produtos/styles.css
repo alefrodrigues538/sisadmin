@@ -27,5 +27,6 @@ th.enderecoTxt{
     word-wrap: break-word;
     overflow: hidden;
     max-height: 100px;
-    width:300px
+    width:300px;
+    padding:0;
 }

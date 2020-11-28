@@ -11,6 +11,10 @@ function navbar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/home">Inicio</Nav.Link>
+                        <NavDropdown title="Produtos" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="/produtos">Pesquisar</NavDropdown.Item>
+                            <NavDropdown.Item href="/produtos/add">Adicionar</NavDropdown.Item>
+                        </NavDropdown>
                         <NavDropdown title="Fornecedores" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/fornecedores">Pesquisar</NavDropdown.Item>
                             <NavDropdown.Item href="/fornecedores/add">Adicionar</NavDropdown.Item>

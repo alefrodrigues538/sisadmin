@@ -11,6 +11,9 @@ import Home from './Home';
 import Fornecedores from './Fornecedores';
 import AddFornecedor from './AddFornecedor';
 
+import Produtos from './Produtos'
+import AddProduto from './AddProduto'
+
 export default function Routes() {
     return (
         <Router>
@@ -18,6 +21,8 @@ export default function Routes() {
                 <Route exact path="/" component={Home} />
                 <Route path="/fornecedores/add" component={AddFornecedor} />
                 <Route path="/fornecedores" component={Fornecedores} />
+                <Route path="/produtos/add" component={AddProduto} />
+                <Route path="/produtos" component={Produtos} />
 
                 <Redirect from="*" to="/" />
             </Switch>
