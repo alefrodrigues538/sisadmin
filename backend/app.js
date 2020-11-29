@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 //CORS
-var whitelist = ['http://sisadmin.vercel.app', 'http://localhost:3000']
+var whitelist = ['https://sisadmin.vercel.app', 'http://localhost:3000']
 var corsOptions={
     origin: function(origin, callback) {
         if(whitelist.indexOf(origin) !== -1){
@@ -12,9 +12,9 @@ var corsOptions={
         } else{
             callback(new Error('Not allowed by CORS'))
         }
-    }
+    },
     // origin:'http://152.250.17.194:3000',
-    // optionsSuccessStatus:200
+    optionsSuccessStatus:200
 }
 
 //PARSERS
