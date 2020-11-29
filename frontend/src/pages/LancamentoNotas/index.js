@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import {
     Container, Row, Col,
-    Form, Button, Card, 
+    Form 
 } from "react-bootstrap"
 
 export default function LancamentoNotas(){

@@ -140,6 +140,8 @@ function AddFornecedor(props) {
             setIsEdit(true);
             getFornecedorByCnpj(search);
         }
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
 
     return (
