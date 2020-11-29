@@ -1,5 +1,5 @@
 const app = require('./app');
-const port = normalizaPort(process.env.PORT || '21008');
+const port = normalizaPort(process.env.PORT || '3006');
 function normalizaPort(val) {
     const port = parseInt(val, 10);
     if (isNaN(port)) {

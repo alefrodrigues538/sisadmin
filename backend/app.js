@@ -7,11 +7,17 @@ const cors = require("cors");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+// //CORS OPTIONS
+// var corsOptions={
+//     origin:'http://localhost:3000',
+//     optionsSuccessStatus: 200
+// }
 //CORS HEADERS
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
+    // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
+    // app.use(cors(corsOptions));
     app.use(cors());
     next();
 });
