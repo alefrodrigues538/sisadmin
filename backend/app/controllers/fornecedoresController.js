@@ -124,11 +124,15 @@ exports.delete = async (req, res, next) => {
     let date = new Date();
 
     console.log(date);
+    console.log(req.params.id)
     try {
         if (req.params.id) {
 
-            result = await models.Fornecedores.findByPk(req.params.id);
-            return res.json(result);
+            result = await models.Fornecedores.findAll({
+                where: {
+                    'id':req.params.id
+                }
+            })
             
             if (result.length > 0) {
                 result = await models.Fornecedores.update({ deleted_at: date }, {

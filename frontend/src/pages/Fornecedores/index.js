@@ -66,9 +66,10 @@ export default function Fornecedores() {
         getTableValues();
     }
 
-    async function deleteRow(id) {
-        await api.delete('/fornecedores/' + id)
+    async function deleteRow(_id) {
+        await api.delete('/fornecedores/' + _id)
             .then(function (res) {
+                console.log(res)
                 getTableValues();
                 setAlertHidden(false);
                 setAlertSuccess(true);
@@ -83,7 +84,9 @@ export default function Fornecedores() {
     }
 
     useEffect(() => {
-        getTableValues();
+        getTableValues()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -128,22 +131,22 @@ export default function Fornecedores() {
                         <thead>
                             <tr>
                                 {
-                                    tHead.map(function (el) {
-                                        return <th key={el.id}>{el}</th>
+                                    tHead.map(function (el, index) {
+                                        return <th key={index}>{el}</th>
                                     })
                                 }
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                tBody.map(function (el) {
+                                tBody.map(function (el,index) {
                                     return (
-                                        <tr key={el.id}>
+                                        <tr key={index}>
                                             <th>{el.id}</th>
                                             <th>{el.name}</th>
                                             <th>{el.cnpj}</th>
                                             <th>{el.telefone}</th>
-                                            <th classname="enderecoTxt">{el.endereco}</th>
+                                            <th className="enderecoTxt">{el.endereco}</th>
                                             <th>
                                                 <Form inline>
                                                     <Form.Group>
@@ -159,7 +162,7 @@ export default function Fornecedores() {
                                                                     <Button variant="secondary" onClick={handleClose}>
                                                                         Cancelar
                                                                     </Button>
-                                                                    <Button variant="danger" onClick={() => deleteRow(el.id)}>
+                                                                    <Button variant="danger" onClick={() => deleteRow(index)}>
                                                                         Deletar
                                                                     </Button>
                                                                 </Modal.Footer>

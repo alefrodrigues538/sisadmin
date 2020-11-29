@@ -6,6 +6,6 @@ router.get('/', controller.get);
 router.get('/:name', controller.getByName);
 router.post('/', controller.post);
 router.put('/:barcode', controller.put);
-router.delete('/:barcode', controller.delete);
+router.delete('/:id', controller.delete);
 
 module.exports = router;

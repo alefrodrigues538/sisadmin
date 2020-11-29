@@ -8,11 +8,14 @@ import {
 
 //PAGES
 import Home from './Home';
-import Fornecedores from './Fornecedores';
-import AddFornecedor from './AddFornecedor';
+import Fornecedores from './Fornecedores'
+import AddFornecedor from './AddFornecedor'
 
 import Produtos from './Produtos'
 import AddProduto from './AddProduto'
+
+import Notas from './Notas'
+import LancamentoNotas from './LancamentoNotas'
 
 export default function Routes() {
     return (
@@ -23,6 +26,8 @@ export default function Routes() {
                 <Route path="/fornecedores" component={Fornecedores} />
                 <Route path="/produtos/add" component={AddProduto} />
                 <Route path="/produtos" component={Produtos} />
+                <Route path="/notas" component={Notas} />
+                <Route path="/notas/lancamento" component={LancamentoNotas} />
 
                 <Redirect from="*" to="/" />
             </Switch>

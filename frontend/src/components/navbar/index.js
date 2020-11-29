@@ -19,6 +19,10 @@ function navbar() {
                             <NavDropdown.Item href="/fornecedores">Pesquisar</NavDropdown.Item>
                             <NavDropdown.Item href="/fornecedores/add">Adicionar</NavDropdown.Item>
                         </NavDropdown>
+                        <NavDropdown title="Notas" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="/notas">Pesquisar</NavDropdown.Item>
+                            <NavDropdown.Item href="/notas/lancamento">Lançamento de notas</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

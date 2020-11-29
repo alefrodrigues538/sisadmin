@@ -63,8 +63,8 @@ export default function Fornecedores() {
         getTableValues();
     }
 
-    async function deleteRow(_barcode) {
-        await api.delete('/produtos/' + _barcode)
+    async function deleteRow(_id) {
+        await api.delete('/produtos/' + _id)
             .then(function (res) {
                 getTableValues();
                 setAlertHidden(false);
@@ -81,6 +81,8 @@ export default function Fornecedores() {
 
     useEffect(() => {
         getTableValues();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -98,7 +100,7 @@ export default function Fornecedores() {
             </Row>
             <Row>
                 <Col>
-                    <h3>Fornecedores</h3>
+                    <h3>Produtos</h3>
                 </Col>
             </Row>
             <Row>
@@ -125,17 +127,17 @@ export default function Fornecedores() {
                         <thead>
                             <tr>
                                 {
-                                    tHead.map(function (el) {
-                                        return <th key={el.id}>{el}</th>
+                                    tHead.map(function (el, index) {
+                                        return <th key={index}>{el}</th>
                                     })
                                 }
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                tBody.map(function (el) {
+                                tBody.map(function (el, index) {
                                     return (
-                                        <tr key={el.id}>
+                                        <tr key={index}>
                                             <th>{el.id}</th>
                                             <th>{el.barcode}</th>
                                             <th>{el.name}</th>
@@ -155,7 +157,7 @@ export default function Fornecedores() {
                                                                     <Button variant="secondary" onClick={handleClose}>
                                                                         Cancelar
                                                                     </Button>
-                                                                    <Button variant="danger" onClick={() => deleteRow(el.barcode)}>
+                                                                    <Button variant="danger" onClick={() => deleteRow(index)}>
                                                                         Deletar
                                                                     </Button>
                                                                 </Modal.Footer>

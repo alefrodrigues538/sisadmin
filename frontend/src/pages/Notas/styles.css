@@ -1,0 +1,11 @@
+form.form-inline{
+    width:100%;
+    align-items: center;
+    justify-content: space-around;
+}
+#link-lancamento{
+    color: #FFF;
+}
+input#formCod.form-control{
+    width: clamp(75%,36vw,90%)
+}

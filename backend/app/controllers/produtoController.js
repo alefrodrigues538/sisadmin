@@ -107,10 +107,10 @@ exports.put = async (req, res, next) => {
                         barcode: req.params.barcode
                     }
                 })
-                return res.status(200).json('Usuario alterado com sucesso');
+                return res.status(200).json('Produto alterado com sucesso');
             } else {
-                console.error('Usuario não existe no banco!')
-                res.status(400).json('O usuario não existe no banco!');
+                console.error('Produto não existe no banco!')
+                res.status(400).json('O produto não existe no banco!');
             }
         }
     } catch (err) {
@@ -124,10 +124,10 @@ exports.delete = async (req, res, next) => {
 
     console.log(date);
     try {
-        if (req.params.barcode) {
+        if (req.params.id) {
             result = await models.Produtos.findAll({
                 where: {
-                    barcode: req.params.barcode,
+                    id: req.params.id,
                     deleted_at: null
                 }
             });
@@ -135,14 +135,14 @@ exports.delete = async (req, res, next) => {
             if (result.length > 0) {
                 result = await models.Produtos.update({ deleted_at: date }, {
                     where: {
-                        barcode: req.params.barcode
+                        id: req.params.id
                     }
                 })
 
-                return res.status(200).json('Usuario deletado com sucesso');
+                return res.status(200).json('Produto deletado com sucesso');
             } else {
-                console.error('Usuario não existe no banco!')
-                res.status(400).json('O usuario não existe no banco!');
+                console.error('Produto não existe no banco!')
+                res.status(400).json('O produto não existe no banco!');
             }
         }
     } catch (err) {

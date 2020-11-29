@@ -1,35 +1,30 @@
-@media screen and (min-width:325px){
-    div.form-control{
-        width:100%;
-        margin: 1000px;
-    }
-}
 #txtVoltar{
     color: #222;
 }
 div.row form{
+    width: clamp(65%,36vw,85%);
     justify-content: center;
     align-items: center;
+}
+div.form-group{
+    justify-content: center;
+    align-items: center;
+}
+input#formBarcode.form-control{
+    width: 80%;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    margin: 0;
 }
 input#formName.form-control,
-input#formEndereco.form-control{
-    width:100%;
-}
-input#formTelefone.form-control,
-input#formCnpj.form-control{
-    width: 172px;
+input#formDescription.form-control{
+    width: 100%;
     justify-content: center;
     align-items: center;
-}
-input#formTelefone.form-control{
-    width:150px;
+    text-align: center;
 }
 label.form-label{
     width:100%;
     text-align: left;
-}
-#cnpjMsg{
-    color:rgb(228, 25, 25);
-    font-weight: bold;
-    font-size: 16px;
 }
