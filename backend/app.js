@@ -4,18 +4,24 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 //CORS
-var whitelist = ['http://sisadmin.vercel.app', 'http://localhost:3000']
+// var whitelist = ['http://sisadmin.vercel.app', 'http://localhost:3000']
 var corsOptions={
-    origin: function(origin, callback) {
-        if(whitelist.indexOf(origin) !== -1){
-            callback(null, true)
-        } else{
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-    // origin:'http://152.250.17.194:3000',
-    // optionsSuccessStatus:200
+    // origin: function(origin, callback) {
+    //     if(whitelist.indexOf(origin) !== -1){
+    //         callback(null, true)
+    //     } else{
+    //         callback(new Error('Not allowed by CORS'))
+    //     }
+    // }
+    origin:'http://localhost:3000',
+    optionsSuccessStatus:200
 }
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'https://sisadmin.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept');
+});
 
 //PARSERS
 app.use(bodyParser.json());
