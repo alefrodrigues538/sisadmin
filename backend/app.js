@@ -5,7 +5,7 @@ const cors = require("cors");
 
 //CORS
 var corsOptions={
-    origin:'http://localhost:3000',
+    origin:'http://152.250.17.194:3000',
     optionsSuccessStatus:200
 }
 

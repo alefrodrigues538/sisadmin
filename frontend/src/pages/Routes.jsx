@@ -26,8 +26,8 @@ export default function Routes() {
                 <Route path="/fornecedores" component={Fornecedores} />
                 <Route path="/produtos/add" component={AddProduto} />
                 <Route path="/produtos" component={Produtos} />
-                <Route path="/notas" component={Notas} />
                 <Route path="/notas/lancamento" component={LancamentoNotas} />
+                <Route path="/notas" component={Notas} />
 
                 <Redirect from="*" to="/" />
             </Switch>
