@@ -1,6 +1,6 @@
 module.exports = {
   dialect: 'mysql',
-  host: 'mysql.sisadmin.kinghost.net',
+  host: 'mysql.seuspedidosdelivery.com.br',
   username: 'sisadmin',
   password: 'xtwo5etaw',
   database: 'sisadmin',
