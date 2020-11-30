@@ -28,6 +28,7 @@ const fornecedores = require("./app/routes/fornecedorRoute");
 const produtos = require("./app/routes/produtoRoute");
 
 //ROTAS
+
 app.use('/api/users', users);
 app.use('/api/fornecedores', fornecedores);
 app.use('/api/produtos', produtos)
