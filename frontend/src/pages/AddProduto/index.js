@@ -8,7 +8,7 @@ import {
     Form, Button, Alert
 } from "react-bootstrap"
 
-function AddFornecedor(props) {
+function AddProduto(props) {
     const [barcode, setBarcode] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -19,7 +19,7 @@ function AddFornecedor(props) {
 
     const [alertHidden, setAlertHidden] = useState(true);
     const [alertSuccess, setAlertSuccess] = useState(true);
-    const [alertMSG, setAlertMSG] = useState('Fornecedor Cadastrado com sucesso!');
+    const [alertMSG, setAlertMSG] = useState('Produto Cadastrado com sucesso!');
 
     function setBarcodeValue(evt) {
         setBarcode(evt.target.value)
@@ -71,12 +71,12 @@ function AddFornecedor(props) {
             console.log(res.status)
             setAlertHidden(false);
             setAlertSuccess(true);
-            setAlertMSG('Fornecedor alterado com sucesso!');
+            setAlertMSG('Produto alterado com sucesso!');
         }).catch(function (error) {
             console.log(error.message, error.response)
             setAlertHidden(false);
             setAlertSuccess(false);
-            setAlertMSG('Não foi possivel alterar este fornecedor!');
+            setAlertMSG('Não foi possivel alterar este produto!');
         });
     }
 
@@ -172,9 +172,9 @@ function AddFornecedor(props) {
                         onClick={isEdit === false ? sendForm : updateForm}>Salvar</Button>
                 </Form>
             </Row>
-            
+
         </Container>
     )
 }
 
-export default AddFornecedor;
+export default AddProduto;

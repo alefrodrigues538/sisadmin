@@ -18,6 +18,10 @@ module.exports = {
       allowNull: false,
       type: Sequelize.STRING(15),
     },
+    endereco: {
+      allowNull: false,
+      type: Sequelize.STRING(256),
+    },
     created_at: {
       allowNull: false,
       type: Sequelize.DATE,

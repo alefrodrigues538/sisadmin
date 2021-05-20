@@ -9,7 +9,7 @@ import {
     Modal
 } from "react-bootstrap"
 
-export default function Fornecedores() {
+export default function Produtos() {
 
     const [tHead, setTHead] = useState([]);
     const [tBody, setTBody] = useState([]);
@@ -39,9 +39,10 @@ export default function Fornecedores() {
     }
 
     async function getTableValues() {
-        console.log(name+','+ barcode)
+        console.log(name + ',' + barcode)
         await api.get('/produtos', {
             headers: {
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
                 'name': name,
                 'barcode': barcode
@@ -69,7 +70,7 @@ export default function Fornecedores() {
                 getTableValues();
                 setAlertHidden(false);
                 setAlertSuccess(true);
-                setAlertMSG('Forncedor deletado com sucesso!');
+                setAlertMSG('Produto deletado com sucesso!');
             }).catch(function (error) {
                 console.log(error.message, error.response)
                 setAlertHidden(false);
@@ -157,7 +158,7 @@ export default function Fornecedores() {
                                                                     <Button variant="secondary" onClick={handleClose}>
                                                                         Cancelar
                                                                     </Button>
-                                                                    <Button variant="danger" onClick={() => deleteRow(index)}>
+                                                                    <Button variant="danger" onClick={() => deleteRow(el.id)}>
                                                                         Deletar
                                                                     </Button>
                                                                 </Modal.Footer>
