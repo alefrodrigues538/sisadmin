@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { RiDeleteBin2Line } from 'react-icons/ri'
 
 export const UploadContainer = styled.div`
     width: 100%;
