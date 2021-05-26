@@ -28,3 +28,10 @@ label.form-label{
     width:100%;
     text-align: left;
 }
+.drop-container{
+    border: 1px dashed #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+
+    transition: height 0.2s ease;
+}

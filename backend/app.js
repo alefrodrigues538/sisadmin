@@ -1,11 +1,18 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const cors = require("cors");
+const multer = require("multer");
+const multerConfig = require('./config/multer');
+
+const path = require('path');
 
 //PARSERS
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'))
+
+
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -13,8 +20,13 @@ app.use(function (req, res, next) {
 
     app.use(cors());
 
+
     next();
 });
+
+// PUBLIC
+app.use(express.static(path.join(__dirname, '.', '/public')));
+app.use('/img', express.static('./public/imgs'));
 
 var corsOptions = {
     origin: '*',
@@ -22,11 +34,15 @@ var corsOptions = {
 }
 
 //ROUTES
+const upload = require("./app/routes/upload");
+
 const users = require("./app/routes/userRoute");
 const fornecedores = require("./app/routes/fornecedorRoute");
 const produtos = require("./app/routes/produtoRoute");
 
 //ROTAS
+
+app.use('/api/upload/img', cors(corsOptions), multer(multerConfig).single('file'), upload)
 
 app.use('/api/users', cors(corsOptions), users);
 app.use('/api/fornecedores', cors(corsOptions), fornecedores);

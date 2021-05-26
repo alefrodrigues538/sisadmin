@@ -17,6 +17,9 @@ import AddProduto from './AddProduto'
 import Notas from './Notas'
 import LancamentoNotas from './LancamentoNotas'
 
+//TEST-PAGES
+import DropArea from './UploadImageTest'
+
 export default function Routes() {
     return (
         <Router>
@@ -29,7 +32,9 @@ export default function Routes() {
                 <Route path="/notas/lancamento" component={LancamentoNotas} />
                 <Route path="/notas" component={Notas} />
 
-                <Redirect from="*" to="/" />
+                <Route path="/img/upload" component={DropArea} />
+
+                {/* <Redirect from="*" to="/" /> */}
             </Switch>
         </Router >
     );

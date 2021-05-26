@@ -146,7 +146,7 @@ export default function Produtos() {
                                             <th>
                                                 <Form inline>
                                                     <Form.Group>
-                                                        <Button variant="outline-secondary"><a href={"/produtos/add?" + el.barcode}>Edit</a></Button>
+                                                        <Button variant="outline-secondary" href={"/produtos/add?" + el.barcode} >Edit</Button>
                                                         <Button variant="outline-danger" onClick={handleShow}>Del</Button>
                                                         <>
                                                             <Modal show={show} onHide={handleClose}>

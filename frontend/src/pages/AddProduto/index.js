@@ -8,6 +8,8 @@ import {
     Form, Button, Alert
 } from "react-bootstrap"
 
+import DropArea from '../UploadImageTest'
+
 function AddProduto(props) {
     const [barcode, setBarcode] = useState('');
     const [name, setName] = useState('');
@@ -128,7 +130,7 @@ function AddProduto(props) {
     }, [search])
 
     return (
-        <Container>
+        <Container className={"container"}>
             <Row>
                 <Col hidden={alertHidden}>
                     <Alert variant={alertSuccess === true ? 'success' : 'danger'}>
@@ -139,17 +141,15 @@ function AddProduto(props) {
                 </Col>
             </Row>
             <Row>
-                <p>{name}</p>
-                <p>{barcode}</p>
-                <p>{description}</p>
-            </Row>
-            <Row>
                 <Col>
                     <h3>Adicionar Produto</h3>
                 </Col>
             </Row>
             <Row>
                 <Form method="POST" action="/api/produtos">
+                    <Form.Group controlId="formUploadImages">
+                        <DropArea maxImages={6} />
+                    </Form.Group>
                     <Form.Group controlId="formBarcode">
                         <Form.Label>Barcode*</Form.Label>
                         <Form.Control type="text" placeholder="Escaneie ou digite..." required
@@ -167,8 +167,8 @@ function AddProduto(props) {
                                 value={description} onChange={setDescriptionValue}></Form.Control>
                         </Form.Group>
                     </Form.Row>
-                    <Button variant="light" type="button"><a href="/produtos" id="txtVoltar">Voltar</a></Button>
-                    <Button variant="primary" type="button"
+                    <Button variant="secondary" type="button" href="/produtos">Voltar</Button>
+                    <Button variant="success" type="button"
                         onClick={isEdit === false ? sendForm : updateForm}>Salvar</Button>
                 </Form>
             </Row>
