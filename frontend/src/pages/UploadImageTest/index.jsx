@@ -4,7 +4,9 @@ import { UploadContainer, DropZone, Image, ImageContainer } from './css/styled-c
 import { uniqueId } from 'lodash'
 import { AiOutlineClose, AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
-const DropArea = ({ LoadedImages, maxImages }) => {
+import api from '../../services/api';
+
+const DropArea = ({ LoadedImages, maxImages, images, owner }) => {
     const [SelectedImages, setSelectedImages] = useState(LoadedImages || []);
     const [DragEntered, setDragEntered] = useState(false);
     function _onChange(evt) {
@@ -31,31 +33,45 @@ const DropArea = ({ LoadedImages, maxImages }) => {
         e.preventDefault();
     }
 
+    async function sendImage(image) {
+        const dataForm = new FormData();
+
+        dataForm.append('owner_id', owner)
+        dataForm.append('file', image);
+        await api.post('/upload/img', dataForm, {
+            headers: {
+                'Content-Type': `multipart/form-data`
+            }
+        })
+    }
+
     function handleGetFileObject(files) {
         let arr = [...SelectedImages]
         for (let index = 0; index < files.length; index++) {
+            console.log(files[index].size)
             if (arr.length + 1 > maxImages) {
                 console.error(`Maximo ${maxImages} imagens!`)
                 break
             }
-            if (files[index].type === "image/jpeg" || files[index].type === "image/jpg" ||
-                files[index].type === "image/png") {
+            if ((files[index].type === "image/jpeg" || files[index].type === "image/jpg" ||
+                files[index].type === "image/png") && Number(files[index].size) < 2000000) {
                 arr.push({
                     'id': uniqueId(),
                     'name': files[index].name,
                     'url': URL.createObjectURL(files[index]),
                     'size': files[index].size
                 })
+                sendImage(files[index]);
             }
         }
         setSelectedImages(arr)
+        images(arr)
         console.log('selImg:', SelectedImages)
     }
 
     function handleRemoveSelectedImg(id) {
         setSelectedImages(SelectedImages.filter(img => img.id !== id))
     }
-
     function handleMoveImageToLeft(index) {
         let arrAux = [...SelectedImages];
         let aux = [];

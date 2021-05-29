@@ -47,20 +47,20 @@ exports.get = async (req, res, next) => {
     }
 };
 
-exports.getByName = async (req, res, next)=> {
+exports.getByName = async (req, res, next) => {
     const _name = req.params.name;
-    if (_name){
+    if (_name) {
         const result = await models.Produtos.findAll({
-            where:{
-                name:_name
+            where: {
+                name: _name
             }
         });
-        if(result.length > 0){
+        if (result.length > 0) {
             res.status(200).json(true);
-        }else{
+        } else {
             res.status(404).json(false);
         }
-    }else{
+    } else {
         res.status(400).json(false);
     }
 }
@@ -99,10 +99,11 @@ exports.put = async (req, res, next) => {
             });
 
             if (result.length > 0) {
-                result = await models.Produtos.update({ 
-                    barcode: req.headers.barcode, 
+                result = await models.Produtos.update({
+                    barcode: req.headers.barcode,
                     name: req.headers.name,
-                    description: req.headers.description}, {
+                    description: req.headers.description
+                }, {
                     where: {
                         barcode: req.params.barcode
                     }

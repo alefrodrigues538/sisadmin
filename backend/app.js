@@ -34,7 +34,7 @@ var corsOptions = {
 }
 
 //ROUTES
-const upload = require("./app/routes/upload");
+const upload = require("./app/routes/uploadRoute");
 
 const users = require("./app/routes/userRoute");
 const fornecedores = require("./app/routes/fornecedorRoute");

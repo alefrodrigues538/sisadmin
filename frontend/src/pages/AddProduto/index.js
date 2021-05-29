@@ -10,13 +10,16 @@ import {
 
 import DropArea from '../UploadImageTest'
 
+import { uniqueId } from 'lodash'
+
 function AddProduto(props) {
     const [barcode, setBarcode] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-
+    const [imgs, setImgs] = useState([]);
     const [search, setSearch] = useState('');
 
+    const [Uid, setUid] = useState(uniqueId());
     const [isEdit, setIsEdit] = useState(false);
 
     const [alertHidden, setAlertHidden] = useState(true);
@@ -34,15 +37,16 @@ function AddProduto(props) {
     }
 
     async function sendForm() {
+        const dataForm = new FormData();
         if (barcode.length > 0 &&
             name.length > 0) {
-            await api.post('/produtos', {
-                'barcode': barcode,
-                'name': name,
-                'description': description
-            }, {
+            dataForm.append('barcode', barcode)
+            dataForm.append('name', name)
+            dataForm.append('description', description)
+
+            await api.post('/produtos', dataForm, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': `multipart/form-data`
                 }
             }).then(function (res) {
                 console.log(res)
@@ -147,8 +151,8 @@ function AddProduto(props) {
             </Row>
             <Row>
                 <Form method="POST" action="/api/produtos">
-                    <Form.Group controlId="formUploadImages">
-                        <DropArea maxImages={6} />
+                    <Form.Group controlId="formUploadImages" >
+                        <DropArea maxImages={6} images={setImgs} owner={Uid} />
                     </Form.Group>
                     <Form.Group controlId="formBarcode">
                         <Form.Label>Barcode*</Form.Label>
